@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% comment %} <h1>Liste des evenement dynamiquement</h1>
+<ul>
+{% for e in events %}
+<a href="{% url 'EventDetailClass' e.id %}" > {{e.title}}</a>
+
+
+<img src="{{e.image.url}}" />
+{% endfor %} {% endcomment %}
+{% comment %} </ul> {% endcomment %}
+<h1>Liste des evenement dynamiquement</h1>
+
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Nombre des participants</th>
+        <th>Noms des participants</th>
+        <th>Nombre de participations</th>
+        <th>Image</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for e in events %}
+        <tr>
+          <td> {{e.id}} </td>
+          <td>{{ e.title }}</td>
+          <td>{{ e.description }}</td>
+          <td>{{ e.nbrParticipants }}</td>
+          <td>   <ul>
+      
+            {% for p in e.participation_set.all %}
+                <li>{{ p.person }}</li>
+                <li>{{ p.id }}</li>
+                <a href="{% url 'supprimer_participation'  e.id   %}">Supprimer la participation</a>
+
+            {% empty %}
+                <li>Aucune participation</li>
+            {% endfor %}
+       
+          </ul></td>
+          <td>{{ e.participations.count }}</td>
+   
+
+          <td><img src="{{ e.image.url }}" alt="{{ e.title }}" width="20px" height="20px"></td>
+
+   
+          <td>
+            <a href="{% url 'ModelUpdateView' e.id%} " >Modifier</a>
+            <a  href= " {% url 'ModelDeleteView' e.id  %} "  >Supprimer</a>
+            <a  href= " {% url 'DeleteEventView' e.id  %} "  >SupprimerPopup</a>
+            
+            <a  href= " {% url 'IncrementNbParticipants' e.id  %} "  >IncrementNbParticip</a>
+            
+                 
+            <a  href= " {% url 'IncrementNbParticipation' e.id  %} "  >IncrementNbParticipation</a>
+            <a  href= " {% url 'AddParticipation' e.id  %} "  >AddParticipation</a>
+            <a  href= " {% url 'EventPartipations' e.id  %} "  >EventPartipations</a>
+
+            
+            
+
+
+            
+            
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+
+
+{% endblock %}

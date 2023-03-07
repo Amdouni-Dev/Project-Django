@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1> liste des participants d'event {{event.id}}</h1>
+{% for p in event.participations.all %}
+<h1> {{p}} </h1>
+
+
+{% endfor %}
+
+{% endblock content %}

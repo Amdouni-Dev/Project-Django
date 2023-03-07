@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load bootstrap_modal_forms %}
+
+{% block content %}
+
+<!-- You can alternatively load the minified version -->
+
+<h1>Delete event</h1>
+<p>Are you sure you want to delete {{ event.name }}?</p>
+<form method="post">
+  {% csrf_token %}
+  {% bootstrap_modal_form_delete form=delete_form button_type="danger" button_title="Delete" button_class="btn-sm" %}
+  <a href="{% url 'EventDetailClass' event.id %}" class="btn btn-primary btn-sm">Cancel</a>
+</form>
+{% endblock %}

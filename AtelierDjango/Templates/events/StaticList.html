@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Liste des evenements</h1>
+
+<ul>
+    {% for e in events %}
+    <li> {{e.title}} </li>
+    {% endfor %}
+</ul>
+{% endblock%}
